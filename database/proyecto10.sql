@@ -19,7 +19,7 @@ SET time_zone = "-03:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `samples`
+-- Base de datos: 
 --
 CREATE DATABASE IF NOT EXISTS `proyecto10` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `proyecto10`;
@@ -43,7 +43,7 @@ CREATE TABLE `events` (
 --
 
 --
--- Indices de la tabla `samples`
+-- Indices de la tabla events
 --
 ALTER TABLE `events`
   ADD PRIMARY KEY (`id`);
@@ -53,7 +53,7 @@ ALTER TABLE `events`
 --
 
 --
--- AUTO_INCREMENT de la tabla `samples`
+-- AUTO_INCREMENT de la tabla `events`
 --
 ALTER TABLE `events`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;

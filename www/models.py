@@ -20,6 +20,5 @@ class Events(Base):
     				'id' : self.id,
     				'semaphore_state' : self.semaphore_state,
     				'created' : self.created,
-
     		}
  

@@ -19,7 +19,7 @@
     <title>Proyecto10-ARTE</title>
 </head>
 <script src="/static/js/bootstrap.min.js" ></script>
-<body onload="selectfrequency();">
+<!-- <body onload="selectfrequency();"> -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand" href="/">Eventos</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,9 +36,6 @@
     <h1 class="display-4" style= "text-align: center"></h1>
 <div class="mx-auto"  >
 
-        
-    
-    
   </div>
     <!-- Promedios -->
     <p style= "text-align: center" class="h3" >Porcentaje </p>
@@ -70,7 +67,7 @@
   </thead>
     {% for e in events %}
   <tbody>
-    <tr>
+    <tr class="{% if e.semaphore_state==True %}alert alert-danger{% else %}alert alert-success{% endif %}" role="alert">
       {% set my_string = 'Verde' %}
       {% if e.semaphore_state == True %}
           {% set my_string = 'Rojo' %}
@@ -78,10 +75,14 @@
       <th scope="row-{{loop.index}}">{{ loop.index }}</th>
       <td id="idfecha">{{e.created}}</td>
       <td id="idstate">{{my_string}} </td>
+      {% if e.semaphore_state == True %}
+      {% endif %}
     </tr>
+      </div>
       {% endfor %}
   </tbody>
   </table>
+<!--   <button id="nuevobutton">asd</button>
 
 <p  id="cartel" style= "text-align: center"  class="h3" >Actualizando cada 3 segundos </p>
   <div style="text-align:center" >
@@ -97,8 +98,9 @@
      <option value="45">45seg</option>
      <option value="60">60seg</option>
     </select>
-   <button  type="button" onclick="selectfrequency()" class="btn btn-dark my-1">Seleccionar</button>
-  </form>
+   <button  type="button" id="hola123" class="btn btn-dark my-1">Seleccionar</button>
+
+  </form> -->
 
 
 </div>

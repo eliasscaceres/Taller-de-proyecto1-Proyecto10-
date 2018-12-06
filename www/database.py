@@ -3,6 +3,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from models import Events
 import os
+import json
 
 class Database(object):
     session = None
@@ -27,20 +28,6 @@ class Database(object):
             self.Base.metadata.create_all(engine)
         return self.session
 
-    # def init_samples(self):
-    #     """Generate the samples in the database
-    
-    #     Returns:
-    #         [id of samples] --
-    #     """
-    #     session = self.get_session()
-    #     sample = Samples()
-    #     session.add(sample)
-    #     session.commit()
-    #     sample_id = int(sample.id)
-    #     session.close()     
-    #     return sample_id
-        # Si hay muestras en la base de datos, retorna la ultima, es decir la mas actual
     def get_event(self):
         session = self.get_session()
         event = session.query(Events).order_by(Events.id.desc()).first()

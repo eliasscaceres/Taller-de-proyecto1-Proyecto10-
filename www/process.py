@@ -7,16 +7,18 @@ import signal
 from database import Database
 import time 
 import urllib.request
-# Metodo que genera los valores para las muestras
+# Metodo que busca en el servidor del ESP por nuevos eventos.
 def getvalue():
     texto = urllib.request.urlopen("http://192.168.4.1").read()
     print (texto)
-    if texto==b'71' :
+    if texto==b'71' :  
         semaphore_state=False
+        # semáforo en verde cuando pasó un objeto
     elif texto==b'82':
         semaphore_state=True
+        # semáforo en rojo cuando pasó un objeto
     else:
-        return 3
+        return 3 
     return semaphore_state
 
 
@@ -28,7 +30,7 @@ class GracefulKiller:
 
 	def exit_gracefully(self, signum, frame):
 		self.kill_now = True
-
+# Funcion que guarda los eventos si tienen valores correctos.
 def main(session):
     killer = GracefulKiller()
     while(True):
@@ -38,16 +40,13 @@ def main(session):
             session.add(event)
             session.commit()
             print("Evento guardado ")
-            time.sleep(1)
+        time.sleep(1)
         # print x
         if killer.kill_now:
             session.close()
             break
 
-
-
 if __name__ == '__main__':
-   
     db = Database()
     session = db.get_session()
     main(session)
