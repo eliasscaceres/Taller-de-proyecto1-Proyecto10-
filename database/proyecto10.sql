@@ -33,7 +33,8 @@ USE `proyecto10`;
 
 CREATE TABLE `events` (
   `id` int(11) NOT NULL,
-  `semaphore_state` boolean NOT NULL
+  `semaphore_state` boolean NOT NULL,
+  `created` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 

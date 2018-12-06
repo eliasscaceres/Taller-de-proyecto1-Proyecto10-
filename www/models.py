@@ -1,9 +1,9 @@
 import datetime
-
 from sqlalchemy.schema import Column
 from sqlalchemy.types import Integer
 from sqlalchemy.types import Float
 from sqlalchemy.types import Boolean
+from sqlalchemy.types import DateTime
 
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -13,11 +13,13 @@ class Events(Base):
     __tablename__ = 'events'
     id=Column(Integer, primary_key=True)
     semaphore_state=Column('semaphore_state', Boolean)
+    created=Column('created',DateTime, default=datetime.datetime.now)
     
     def serialize(self):
     		return {
     				'id' : self.id,
     				'semaphore_state' : self.semaphore_state,
+    				'created' : self.created,
 
     		}
  

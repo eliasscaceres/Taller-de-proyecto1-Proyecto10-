@@ -6,10 +6,19 @@ import random
 import signal
 from database import Database
 import time 
+import urllib.request
 # Metodo que genera los valores para las muestras
-def getrand():
-	semaphore_state = True
-	return semaphore_state
+def getvalue():
+    texto = urllib.request.urlopen("http://192.168.4.1").read()
+    print (texto)
+    if texto==b'71' :
+        semaphore_state=False
+    elif texto==b'82':
+        semaphore_state=True
+    else:
+        return 3
+    return semaphore_state
+
 
 class GracefulKiller:
 	kill_now = False
@@ -23,12 +32,13 @@ class GracefulKiller:
 def main(session):
     killer = GracefulKiller()
     while(True):
-        s_state = getrand()
-        event = Events(semaphore_state=s_state)
-        session.add(event)
-        session.commit()
-        print("Evento guardado ")
-        time.sleep(1)
+        s_state = getvalue()
+        if s_state!=3:
+            event = Events(semaphore_state=s_state)
+            session.add(event)
+            session.commit()
+            print("Evento guardado ")
+            time.sleep(1)
         # print x
         if killer.kill_now:
             session.close()
